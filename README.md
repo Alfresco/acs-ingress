@@ -50,4 +50,4 @@ digital-workspace-ingress:
 
 Bamboo branches:
 
-* Alfresco Digital Workspace / [ACS Nginx Proxy](https://bamboo.alfresco.com/bamboo/browse/ADW-ANP)
+* Alfresco Digital Workspace / [ACS Nginx Proxy](https://bamboo.alfresco.com/bamboo/browse/PLAT-ACSING)
