@@ -1,9 +1,5 @@
 #!/bin/sh
 
-if [[ $ADW_URL ]]; then
-  sed -i s%http:\/\/digital-workspace:8080%"$ADW_URL"%g /etc/nginx/nginx.conf
-fi
-
 if [[ $REPO_URL ]]; then
   sed -i s%http:\/\/alfresco:8080%"$REPO_URL"%g /etc/nginx/nginx.conf
 fi
