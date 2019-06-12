@@ -20,7 +20,7 @@ docker run \
   -e SHARE_URL="http://share:8093" \
   -e ACCESS_LOG="off" \
   --rm -p 80:80/tcp \
-  quay.io/alfresco/alfresco-acs-nginx:1.0.0
+  alfresco/alfresco-acs-nginx:3.0.1
 ```
 
 Using with docker-compose:
@@ -30,7 +30,7 @@ digital-workspace:
     image: quay.io/alfresco/alfresco-digital-workspace:1.0.0
 
 digital-workspace-ingress:
-    image: quay.io/alfresco/alfresco-acs-nginx:1.0.0
+    image: alfresco/alfresco-acs-nginx:3.0.1
     depends_on:
         - alfresco
         - digital-workspace
@@ -50,4 +50,4 @@ digital-workspace-ingress:
 
 Bamboo branches:
 
-* Alfresco Digital Workspace / [ACS Nginx Proxy](https://bamboo.alfresco.com/bamboo/browse/PLAT-ACSING)
+* Repository / [ACS Ingress](https://bamboo.alfresco.com/bamboo/browse/PLAT-ACSING)
