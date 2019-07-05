@@ -12,6 +12,10 @@ if [[ $SHARE_URL ]]; then
   sed -i s%http:\/\/share:8080%"$SHARE_URL"%g /etc/nginx/nginx.conf
 fi
 
+if [[ $SYNCSERVICE_URL ]]; then
+  sed -i s%http:\/\/sync-service:9090%"$SYNCSERVICE_URL"%g /etc/nginx/nginx.conf
+fi
+
 if [[ $ACCESS_LOG ]]; then
   sed -i s%\#ENV_ACCESS_LOG%"access_log $ACCESS_LOG;"%g /etc/nginx/nginx.conf
 fi
