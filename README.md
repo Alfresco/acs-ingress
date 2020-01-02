@@ -46,7 +46,7 @@ digital-workspace-ingress:
     #     ADW_URL: "http://digital-workspace"
     #     REPO_URL: "http://alfresco:8080"
     #     SHARE_URL: "http://share:8080"
-	#     SYNCSERVICE_URL: "http://sync-service:9090"
+    #     SYNCSERVICE_URL: "http://sync-service:9090"
 ```
 
 ## Continuous Integration
