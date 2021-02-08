@@ -71,4 +71,4 @@ proxy:
 
 ## Continuous Integration
 
-Travis build: TODO
+[Travis build](https://travis-ci.com/github/Alfresco/acs-ingress)

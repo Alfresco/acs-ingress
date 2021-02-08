@@ -15,14 +15,15 @@ branches:
 
 before_script:
   - export IMAGE_NAME=alfresco/alfresco-acs-nginx
-  - export IMAGE_TAG=test
+  - export IMAGE_TAG=latest
 
 script:
+  - echo "Building and tagging $IMAGE_NAME:$IMAGE_TAG..."
   - docker build . -t $IMAGE_NAME:$IMAGE_TAG
   - docker images
   - |-
     if [[ "${TRAVIS_BRANCH}" == "master" ]] && [[ "${TRAVIS_COMMIT_MESSAGE}" == *"[release]"* ]]
     then
-      echo "Tagging and pushing to $IMAGE_NAME:$IMAGE_TAG..."
+      echo "Pushing to $IMAGE_NAME:$IMAGE_TAG..."
       docker push $IMAGE_NAME:$IMAGE_TAG
     fi
