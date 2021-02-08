@@ -1,5 +1,5 @@
 FROM nginx:stable-alpine
-LABEL version="1.0.0"
+LABEL version="3.1.0"
 LABEL maintainer="Denys Vuika <denys.vuika@alfresco.com>"
 
 COPY nginx.conf /etc/nginx/nginx.conf

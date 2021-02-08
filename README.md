@@ -1,6 +1,6 @@
 # ACS Nginx Proxy
 
-A proxy container for ACS deployment with Alfresco Digital Workspace support.
+A proxy container for ACS deployment with Alfresco Digital Workspace and Sync Service support.
 
 ## Environment variables
 
@@ -11,6 +11,8 @@ A proxy container for ACS deployment with Alfresco Digital Workspace support.
 | SHARE_URL | `http://share:8080` | Share URL inside network. |
 | SYNCSERVICE_URL | `http://sync-service:9090` | Sync service URL inside network. |
 | ACCESS_LOG | n/a | Set the `access_log` value. Set to `off` to switch off logging. |
+| DISABLE_ADW | `false` | Disables ADW if set to `"true"` |
+| DISABLE_SYNCSERVICE | `false` | Disables Sync Service if set to `"true"` |
 
 ## Examples
 
@@ -22,7 +24,7 @@ docker run \
   -e SYNCSERVICE_URL="http://sync-service:9090" \
   -e ACCESS_LOG="off" \
   --rm -p 80:80/tcp \
-  alfresco/alfresco-acs-nginx:3.0.1
+  alfresco/alfresco-acs-nginx:3.1.0
 ```
 
 Using with docker-compose:
@@ -32,7 +34,7 @@ digital-workspace:
     image: quay.io/alfresco/alfresco-digital-workspace:1.0.0
 
 digital-workspace-ingress:
-    image: alfresco/alfresco-acs-nginx:3.0.1
+    image: alfresco/alfresco-acs-nginx:3.1.0
     depends_on:
         - alfresco
         - digital-workspace
@@ -49,8 +51,24 @@ digital-workspace-ingress:
     #     SYNCSERVICE_URL: "http://sync-service:9090"
 ```
 
+Using with docker-compose Community deployment:
+
+```yml
+proxy:
+    image: alfresco/alfresco-acs-nginx:3.1.0
+    mem_limit: 128m
+    environment:
+        DISABLE_SYNCSERVICE: "true"
+        DISABLE_ADW: "true"
+    depends_on:
+        - alfresco
+    ports:
+        - 8080:8080
+    links:
+        - alfresco
+        - share
+```
+
 ## Continuous Integration
 
-Bamboo branches:
-
-* Repository / [ACS Ingress](https://bamboo.alfresco.com/bamboo/browse/PLAT-ACSING)
+Travis build: TODO
