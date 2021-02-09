@@ -13,6 +13,7 @@ A proxy container for ACS deployment with Alfresco Digital Workspace and Sync Se
 | DISABLE_ADW | `false` | Disables ADW if set to `"true"` |
 | DISABLE_SHARE | `false` | Disables Share if set to `"true"` |
 | DISABLE_SYNCSERVICE | `false` | Disables Sync Service if set to `"true"` |
+| DISABLE_PROMETHEUS | `false` | Disables Prometheus if set to `"true"` |
 | ACCESS_LOG | n/a | Set the `access_log` value. Set to `off` to switch off logging. |
 
 ## Examples
@@ -59,6 +60,7 @@ proxy:
     image: alfresco/alfresco-acs-nginx:3.1.0
     mem_limit: 128m
     environment:
+        DISABLE_PROMETHEUS: "true"
         DISABLE_SYNCSERVICE: "true"
         DISABLE_ADW: "true"
     depends_on:
