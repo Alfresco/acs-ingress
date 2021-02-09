@@ -1,0 +1,29 @@
+language: minimal
+
+services:
+  - docker
+
+import:
+  - source: Alfresco/alfresco-build-tools:.travis.docker_login.yml@v1.0.1
+
+branches:
+  only:
+    - master
+    - /feature.*/
+    - /fix.*/
+    - /OPSEXP-.*/
+
+before_script:
+  - export IMAGE_NAME=alfresco/alfresco-acs-nginx
+  - export IMAGE_TAG=latest
+
+script:
+  - echo "Building and tagging $IMAGE_NAME:$IMAGE_TAG..."
+  - docker build . -t $IMAGE_NAME:$IMAGE_TAG
+  - docker images
+  - |-
+    if [[ "${TRAVIS_BRANCH}" == "master" ]] && [[ "${TRAVIS_COMMIT_MESSAGE}" == *"[release]"* ]]
+    then
+      echo "Pushing to $IMAGE_NAME:$IMAGE_TAG..."
+      docker push $IMAGE_NAME:$IMAGE_TAG
+    fi
