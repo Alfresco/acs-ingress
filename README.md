@@ -6,13 +6,14 @@ A proxy container for ACS deployment with Alfresco Digital Workspace and Sync Se
 
 | Name | Default | Description |
 | --- | --- | --- |
-| ADW_URL | `http://digital-workspace` | Digital Workspace URL inside network. |
 | REPO_URL | `http://alfresco:8080` | Repository URL inside network. |
+| ADW_URL | `http://digital-workspace` | Digital Workspace URL inside network. |
 | SHARE_URL | `http://share:8080` | Share URL inside network. |
 | SYNCSERVICE_URL | `http://sync-service:9090` | Sync service URL inside network. |
-| ACCESS_LOG | n/a | Set the `access_log` value. Set to `off` to switch off logging. |
 | DISABLE_ADW | `false` | Disables ADW if set to `"true"` |
+| DISABLE_SHARE | `false` | Disables Share if set to `"true"` |
 | DISABLE_SYNCSERVICE | `false` | Disables Sync Service if set to `"true"` |
+| ACCESS_LOG | n/a | Set the `access_log` value. Set to `off` to switch off logging. |
 
 ## Examples
 

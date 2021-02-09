@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [[ "$DISABLE_SHARE" != "true" ]]; then
+  sed -i s%\#SHARE_LOCATION%"location /share/ {\n            proxy_pass http://share:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+fi
+
 if [[ "$DISABLE_ADW" != "true" ]]; then
   sed -i s%\#ADW_LOCATION%"location /workspace/ {\n            proxy_pass http://digital-workspace:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
