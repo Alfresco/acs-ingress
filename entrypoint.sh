@@ -5,7 +5,7 @@ if [[ "$DISABLE_SHARE" != "true" ]]; then
 fi
 
 if [[ "$DISABLE_ADW" != "true" ]]; then
-  sed -i s%\#ADW_LOCATION%"location /workspace/ {\n            proxy_pass http://digital-workspace:8080;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  sed -i s%\#ADW_LOCATION%"location /workspace/ {\n            proxy_pass http://digital-workspace:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_SYNCSERVICE" != "true" ]]; then
