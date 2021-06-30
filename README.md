@@ -15,6 +15,7 @@ A proxy container for ACS deployment with Alfresco Digital Workspace and Sync Se
 | DISABLE_SYNCSERVICE | `false` | Disables Sync Service if set to `"true"` |
 | DISABLE_PROMETHEUS | `false` | Disables Prometheus if set to `"true"` |
 | ACCESS_LOG | n/a | Set the `access_log` value. Set to `off` to switch off logging. |
+| ERROR_LOG | n/a | Set the `error_log` value. |
 | USE_SSL | `false` | Enables ssl use if set to `"true"` |
 | DOMAIN | n/a | Set domain value for ssl certificate |
 
@@ -27,6 +28,7 @@ docker run \
   -e SHARE_URL="http://share:8093" \
   -e SYNCSERVICE_URL="http://sync-service:9090" \
   -e ACCESS_LOG="off" \
+  -e ERROR_LOG="/var/log/nginx/error.log warn" \
   -e USE_SSL="true" \
   -e DOMAIN="domain.com" \ # when USE_SSL="true"
   -v ssl/:/etc/nginx/ssl/ \ # when USE_SSL="true"
