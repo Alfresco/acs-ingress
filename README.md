@@ -17,7 +17,7 @@ A proxy container for ACS deployment with Alfresco Digital Workspace and Sync Se
 | ACCESS_LOG | n/a | Set the `access_log` value. Set to `off` to switch off logging. |
 | ERROR_LOG | n/a | Set the `error_log` value. |
 | USE_SSL | `false` | Enables ssl use if set to `"true"` |
-| DOMAIN | n/a | Set domain value for ssl certificate |
+| DOMAIN | n/a | Set domain value. |
 
 ## Examples
 
@@ -30,7 +30,7 @@ docker run \
   -e ACCESS_LOG="off" \
   -e ERROR_LOG="/var/log/nginx/error.log warn" \
   -e USE_SSL="true" \
-  -e DOMAIN="domain.com" \ # when USE_SSL="true"
+  -e DOMAIN="domain.com" \
   -v ssl/:/etc/nginx/ssl/ \ # when USE_SSL="true"
   --rm -p 443:443/tcp \ # when USE_SSL="true" | default 8080:8080
   alfresco/alfresco-acs-nginx:3.2.0
@@ -58,7 +58,7 @@ digital-workspace-ingress:
        - ${PWD}/ssl/:/etc/nginx/ssl/ # when USE_SSL="true"
     environment:
         USE_SSL: "true"
-        DOMAIN: "domain.com" # when USE_SSL="true"
+        DOMAIN: "domain.com"
     #     ADW_URL: "http://digital-workspace"
     #     REPO_URL: "http://alfresco:8080"
     #     SHARE_URL: "http://share:8080"
@@ -76,7 +76,7 @@ proxy:
         DISABLE_SYNCSERVICE: "true"
         DISABLE_ADW: "true"
         USE_SSL: "true" #
-        DOMAIN: "domain.com" # when USE_SSL="true"
+        DOMAIN: "domain.com"
     depends_on:
         - alfresco
     ports:
