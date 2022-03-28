@@ -8,7 +8,7 @@ A proxy container for ACS deployment with Alfresco Digital Workspace and Sync Se
 | --- | --- | --- |
 | REPO_URL | `http://alfresco:8080` | Repository URL inside network. |
 | ADW_URL | `http://digital-workspace` | Digital Workspace URL inside network. |
-| CONTROLCENTER_URL | `http://controlcenter` | Control Center URL inside network. |
+| CONTROL_CENTER_URL | `http://control-center` | Control Center URL inside network. |
 | SHARE_URL | `http://share:8080` | Share URL inside network. |
 | SYNCSERVICE_URL | `http://sync-service:9090` | Sync service URL inside network. |
 | DISABLE_ADW | `false` | Disables ADW if set to `"true"` |
@@ -26,7 +26,7 @@ docker run \
   -e ADW_URL="http://digital-workspace:8091" \
   -e REPO_URL="http://alfresco:8092" \
   -e SHARE_URL="http://share:8093" \
-  -e CONTROLCENTER_URL="http://controlcenter:8094" \
+  -e CONTROL_CENTER_URL="http://control-center:8094" \
   -e SYNCSERVICE_URL="http://sync-service:9090" \
   -e ACCESS_LOG="off" \
   -e USE_SSL="true" \
