@@ -20,8 +20,8 @@ if [[ "$DISABLE_PROMETHEUS" != "true" ]]; then
   sed -i s%\#PROMETHEUS_LOCATION%"location ~ ^(/.*/s/prometheus)$ {return 403;}"%g /etc/nginx/nginx.conf
 fi
 
-if [[ $ADW_URL ]]; then
-  sed -i s%http:\/\/digital-workspace:8080%"$ADW_URL"%g /etc/nginx/nginx.conf
+if [[ "$ENABLE_CONTENT_APP" == "true" ]]; then
+  sed -i s%\#ACA_LOCATION%"location /content-app/ {\n            proxy_pass http://content-app:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ $CONTROL_CENTER_URL ]]; then
@@ -38,6 +38,10 @@ fi
 
 if [[ $SYNCSERVICE_URL ]]; then
   sed -i s%http:\/\/sync-service:9090%"$SYNCSERVICE_URL"%g /etc/nginx/nginx.conf
+fi
+
+if [[ $ACA_URL ]]; then
+  sed -i s%http:\/\/content-app:8080%"$ACA_URL"%g /etc/nginx/nginx.conf
 fi
 
 if [[ $ACCESS_LOG ]]; then
