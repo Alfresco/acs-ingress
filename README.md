@@ -15,6 +15,7 @@ A proxy container for ACS deployment with Alfresco Digital Workspace and Sync Se
 | DISABLE_SHARE | `false` | Disables Share if set to `"true"` |
 | DISABLE_SYNCSERVICE | `false` | Disables Sync Service if set to `"true"` |
 | DISABLE_PROMETHEUS | `false` | Disables Prometheus if set to `"true"` |
+| DISABLE_CONTROL_CENTER | `false` | Disables ADW Control Center if set to `"true"` |
 | ACCESS_LOG | n/a | Set the `access_log` value. Set to `off` to switch off logging. |
 | USE_SSL | `false` | Enables ssl use if set to `"true"` |
 | DOMAIN | n/a | Set domain value for ssl certificate |
