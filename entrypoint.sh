@@ -24,6 +24,10 @@ if [[ "$ENABLE_CONTENT_APP" == "true" ]]; then
   sed -i s%\#ACA_LOCATION%"location /content-app/ {\n            proxy_pass http://content-app:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
+if [[ $ADW_URL ]]; then
+  sed -i s%http:\/\/digital-workspace:8080%"$ADW_URL"%g /etc/nginx/nginx.conf
+fi
+
 if [[ $CONTROL_CENTER_URL ]]; then
   sed -i s%http:\/\/control-center:8080%"$CONTROL_CENTER_URL"%g /etc/nginx/nginx.conf
 fi
