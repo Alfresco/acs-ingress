@@ -46,7 +46,7 @@ digital-workspace:
     image: quay.io/alfresco/alfresco-digital-workspace:1.0.0
 
 digital-workspace-ingress:
-    image: alfresco/alfresco-acs-nginx:3.1.0
+    image: alfresco/alfresco-acs-nginx:3.4.0
     depends_on:
         - alfresco
         - digital-workspace
@@ -78,12 +78,13 @@ content-app:
       APP_BASE_SHARE_URL: "http://localhost:8080/content-app/#/preview/s"
 
 proxy:
-    image: alfresco/alfresco-acs-nginx:3.1.0
+    image: alfresco/alfresco-acs-nginx:3.4.0
     mem_limit: 128m
     environment:
         DISABLE_PROMETHEUS: "true"
         DISABLE_SYNCSERVICE: "true"
         DISABLE_ADW: "true"
+        DISABLE_CONTROL_CENTER: "true"
         ENABLE_CONTENT_APP: "true"
         USE_SSL: "true" #
         DOMAIN: "domain.com" # when USE_SSL="true"
