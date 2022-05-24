@@ -21,7 +21,7 @@ if [[ "$DISABLE_PROMETHEUS" != "true" ]]; then
 fi
 
 if [[ "$ENABLE_CONTENT_APP" == "true" ]]; then
-  sed -i s%\#ACA_LOCATION%"location /content-app/ {\n            proxy_pass http://content-app:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  sed -i s%\#ACA_LOCATION%"location /aca/ {\n            proxy_pass http://content-app:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ $ADW_URL ]]; then
