@@ -15,7 +15,7 @@ branches:
 before_script:
   - echo "TRAVIS_COMMIT_MESSAGE=$TRAVIS_COMMIT_MESSAGE"
   - export IMAGE_NAME=alfresco/alfresco-acs-nginx
-  - export IMAGE_TAG=3.4.1
+  - export IMAGE_TAG=3.4.2
 
 script:
   - echo "Building and tagging $IMAGE_NAME:$IMAGE_TAG..."
