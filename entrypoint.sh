@@ -1,19 +1,31 @@
 #!/bin/sh
 
 if [[ "$DISABLE_SHARE" != "true" ]]; then
-  sed -i s%\#SHARE_LOCATION%"location /share/ {\n            proxy_pass http://share:8080;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  SHARE_HOST=$(echo "$SHARE_URL" | cut -d '/' -f 3)
+  sed -i s%\#SHARE_UPSTREAM%"upstream share {\n        server ${SHARE_HOST};\n        keepalive 2;\n    }"%g /etc/nginx/nginx.conf
+  SHARE_SCHEME=$(echo "$SHARE_URL" | grep -Eo '^https?://' || echo "http://")
+  sed -i s%\#SHARE_LOCATION%"location /share/ {\n            proxy_pass ${SHARE_SCHEME}share;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_ADW" != "true" ]]; then
-  sed -i s%\#ADW_LOCATION%"location /workspace/ {\n            proxy_pass http://digital-workspace:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  ADW_HOST=$(echo "$ADW_URL" | cut -d '/' -f 3)
+  sed -i s%\#ADW_UPSTREAM%"upstream digital-workspace {\n        server ${ADW_HOST};\n        keepalive 2;\n    }"%g /etc/nginx/nginx.conf
+  ADW_SCHEME=$(echo "$ADW_URL" | grep -Eo '^https?://' || echo "http://")
+  sed -i s%\#ADW_LOCATION%"location /workspace/ {\n            proxy_pass ${ADW_SCHEME}digital-workspace/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_CONTROL_CENTER" != "true" ]]; then
-  sed -i s%\#CONTROL_CENTER_LOCATION%"location /admin/ {\n            proxy_pass http://control-center:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
+  CONTROL_CENTER_HOST=$(echo "$CONTROL_CENTER_URL" | cut -d '/' -f 3)
+  sed -i s%\#CONTROL_CENTER_UPSTREAM%"upstream control-center {\n        server ${CONTROL_CENTER_HOST};\n        keepalive 2;\n    }"%g /etc/nginx/nginx.conf
+  CONTROL_CENTER_SCHEME=$(echo "$CONTROL_CENTER_URL" | grep -Eo '^https?://' || echo "http://")
+  sed -i s%\#CONTROL_CENTER_LOCATION%"location /admin/ {\n            proxy_pass ${CONTROL_CENTER_SCHEME}control-center/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_SYNCSERVICE" != "true" ]]; then
-  sed -i s%\#SYNCSERVICE_LOCATION%"location /syncservice/ {\n            proxy_pass http://sync-service:9090/alfresco/;\n        }"%g /etc/nginx/nginx.conf
+  SYNCSERVICE_HOST=$(echo "$SYNCSERVICE_URL" | cut -d '/' -f 3)
+  sed -i s%\#SYNCSERVICE_UPSTREAM%"upstream sync-service {\n        server ${SYNCSERVICE_HOST};\n        keepalive 2;\n    }"%g /etc/nginx/nginx.conf
+  SYNCSERVICE_SCHEME=$(echo "$SYNCSERVICE_URL" | grep -Eo '^https?://' || echo "http://")
+  sed -i s%\#SYNCSERVICE_LOCATION%"location /syncservice/ {\n            proxy_pass ${SYNCSERVICE_SCHEME}sync-service/alfresco/;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ "$DISABLE_PROMETHEUS" != "true" ]]; then
@@ -21,31 +33,17 @@ if [[ "$DISABLE_PROMETHEUS" != "true" ]]; then
 fi
 
 if [[ "$ENABLE_CONTENT_APP" == "true" ]]; then
-  sed -i s%\#ACA_LOCATION%"location /content-app/ {\n            proxy_pass http://content-app:8080/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
-fi
-
-if [[ $ADW_URL ]]; then
-  sed -i s%http:\/\/digital-workspace:8080%"$ADW_URL"%g /etc/nginx/nginx.conf
-fi
-
-if [[ $CONTROL_CENTER_URL ]]; then
-  sed -i s%http:\/\/control-center:8080%"$CONTROL_CENTER_URL"%g /etc/nginx/nginx.conf
+  CONTENT_APP_HOST=$(echo "$ADW_URL" | cut -d '/' -f 3)
+  sed -i s%\#ACA_UPSTREAM%"upstream content-app {\n        server ${CONTENT_APP_HOST};\n        keepalive 2;\n    }"%g /etc/nginx/nginx.conf
+  CONTENT_APP_SCHEME=$(echo "$ACA_URL" | grep -Eo '^https?://' || echo "http://")
+  sed -i s%\#ACA_LOCATION%"location /content-app/ {\n            proxy_pass ${CONTENT_APP_SCHEME}content-app/;\n            absolute_redirect off;\n        }"%g /etc/nginx/nginx.conf
 fi
 
 if [[ $REPO_URL ]]; then
-  sed -i s%http:\/\/alfresco:8080%"$REPO_URL"%g /etc/nginx/nginx.conf
-fi
-
-if [[ $SHARE_URL ]]; then
-  sed -i s%http:\/\/share:8080%"$SHARE_URL"%g /etc/nginx/nginx.conf
-fi
-
-if [[ $SYNCSERVICE_URL ]]; then
-  sed -i s%http:\/\/sync-service:9090%"$SYNCSERVICE_URL"%g /etc/nginx/nginx.conf
-fi
-
-if [[ $ACA_URL ]]; then
-  sed -i s%http:\/\/content-app:8080%"$ACA_URL"%g /etc/nginx/nginx.conf
+  REPO_HOST=$(echo "$REPO_URL" | cut -d '/' -f 3)
+  sed -i s%alfresco:8080%"$REPO_HOST"%g /etc/nginx/nginx.conf
+  REPO_SCHEME=$(echo "$REPO_URL" | grep -Eo '^https?://' || echo "http://")
+  sed -i s%http:\/\/alfresco%"${REPO_SCHEME}alfresco"%g /etc/nginx/nginx.conf
 fi
 
 if [[ $ACCESS_LOG ]]; then
