@@ -1,18 +1,16 @@
 # ACS Nginx Proxy
 
-## DEPRECATION WARNING
-
-:warning: This image is no more used in the Alfresco docker compose files as
-it's unmaintained for quite sometime now. While docker compose files should be
-used for development purposes only we now leverage traefik as a reverse proxy
-based on the official image so it's more maintainable for us.
-
-At some point this repository will be archived to
-[AlfrescoArchive](https://www.github.com/AlfrescoArchive).
-
 A proxy container for ACS deployment with Alfresco Digital Workspace and Sync
 Service support. If USE_SSL set to true provide ssl cert in ssl/cert.crt and
 ssl/cert.key
+
+## DEPRECATION WARNING
+
+:warning: This image is no more used in the [Alfresco docker
+compose](https://github.com/Alfresco/acs-deployment/tree/master/docker-compose)
+files as it's unmaintained for quite sometime now. While docker compose files
+should be used for development purposes only we now leverage traefik as a
+reverse proxy based on the official image so it's more maintainable for us.
 
 ## Environment variables
 
